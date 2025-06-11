@@ -17,6 +17,25 @@
 
     ```
 
+- Crie o .env:
+
+    ```sh
+
+    copy .env.example .env
+
+    ```
+
+- Preencha os dados no .env:
+
+```
+
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+
+JWT_SECRET=
+
+```
+
 - Iniciando com Docker
 
     ```sh
@@ -26,7 +45,57 @@
     ```
 
 - Acesse o serviço em:
-    
     [localhost:8080](http://localhost:8080/)
 
- 
+### Estrutura de Pastas
+
+```
+    └── sistema-de-gerenciamento-escolar
+            └── index
+            └── info
+                └── exclude
+            └── logs
+        └── app
+            └── Http
+                └── Controllers
+                    └── AlunosApi
+                        └── DeleteAlunoController.js
+                        └── GetAlunoController.js
+                        └── InsertAlunoController.js
+                        └── PostAlunoController.js
+                        └── UpdateAlunoController.js
+                    └── dateController.js
+                └── Middlewares
+                    └── jwtAuthMiddleware.js
+            └── Models
+                └── alunosModel.js
+                └── professoresModel.js
+        └── bootstrap
+            └── app.js
+            └── constants.js
+            └── helpers.js
+        └── docker
+            └── nginx
+                └── default.conf
+                └── dockerfile
+            └── node-cli
+                └── dockerfile
+            └── node-web
+                └── dockerfile.dev
+            └── postgres
+                └── init.sql
+        └── Docs
+        └── public
+            └── index.html
+        └── routes
+            └── api
+            └── api.js
+                └── alunosApi.js
+            └── routes.js
+            └── web.js
+        └── .env.example
+        └── .gitignore
+        └── docker-compose.yaml
+        └── README.md
+        └── server.js
+```

@@ -1,0 +1,86 @@
+services:
+
+  #NODE WEB
+  node-web:
+    build:
+      context: .
+      dockerfile: docker/node-web/Dockerfile.dev
+    env_file: .env
+    volumes:
+      - .:/app
+      - node-modules-volume:/app/node_modules
+    restart: unless-stopped
+    environment:
+      - IS_CONTAINER=TRUE
+      - POSTGRES_HOST=postgres_host
+      - POSTGRES_PORT=5432
+    expose:
+      - ${NODE_PORT}
+    networks:
+      - project-network
+    depends_on:
+      - postgres
+
+  #NODE CLI
+  cli-container:
+    build:
+      context: .
+      dockerfile: docker/node-cli/Dockerfile
+    env_file: .env
+    volumes:
+      - .:/app
+      - node-modules-volume:/app/node_modules
+    environment:
+      - IS_CONTAINER=TRUE
+      - POSTGRES_HOST=postgres_host
+      - POSTGRES_PORT=5432
+    networks:
+      - project-network
+    depends_on:
+      - postgres
+
+  #NGINX
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "${PORT}:80"
+    volumes:
+      - ./public:/var/www/public
+    depends_on:
+      - node-web
+    networks:
+      project-network:
+        aliases:
+            - web_host
+
+  #POSTGRES
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      TZ: America/Sao_Paulo
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - pgdata-volume:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    networks:
+      project-network:
+        aliases:
+          - postgres_host
+
+
+#OTHERS
+
+networks:
+  project-network:
+    driver: bridge
+
+volumes:
+  pgdata-volume:
+  node-modules-volume:

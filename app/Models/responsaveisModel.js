@@ -4,7 +4,7 @@ import "../../bootstrap/app.js";
 
 export default (function () {
     return sequelize.define(
-        "alunosModel",
+        "responsaveisModel",
         {
             id: {
                 type: DataTypes.INTEGER,
@@ -20,19 +20,18 @@ export default (function () {
                 type: DataTypes.DATE,
                 allowNull: false
             },
-            created_at: {
-                type: DataTypes.DATE,
+            email: {
+                type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: DataTypes.NOW
+                unique: true
             },
-            updated_at: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: DataTypes.NOW
+            telefone: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
         },
         {
-            tableName: "alunos",
+            tableName: "responsaveis",
             timestamps: true,
             updatedAt: "updated_at",
             createdAt: "created_at"

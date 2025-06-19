@@ -1,7 +1,7 @@
-import alunosModel from './alunosModel.js';
-import responsaveisModel from './responsaveisModel.js';
-import turmasModel from './turmasModel.js';
-import professoresModel from './professoresModel.js';
+import alunosModel from '../app/Models/alunosModel.js';
+import responsaveisModel from '../app/Models/responsaveisModel.js';
+import turmasModel from '../app/Models/turmasModel.js';
+import professoresModel from '../app/Models/professoresModel.js';
 
 // Aluno pertence a Responsável
 alunosModel.belongsTo(responsaveisModel, {

@@ -20,6 +20,10 @@ export default (function () {
                 type: DataTypes.DATE,
                 allowNull: false
             },
+            disciplina: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
             email: {
                 type: DataTypes.STRING,
                 allowNull: false,

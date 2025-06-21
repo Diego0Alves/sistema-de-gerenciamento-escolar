@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS professores (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     data_nascimento DATE NOT NULL,
+    disciplina VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     turma_id INTEGER NOT NULL,

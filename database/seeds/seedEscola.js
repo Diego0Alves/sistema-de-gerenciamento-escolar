@@ -50,9 +50,9 @@ export async function up() {
       }
     ]);
 
-    console.log('✅ Seed UP concluído com sucesso!');
+    console.log(' Seed UP concluído com sucesso!');
   } catch (error) {
-    console.error('❌ Erro no seed UP:', error);
+    console.error(' Erro no seed UP:', error);
   }
 }
 
@@ -63,8 +63,8 @@ export async function down() {
     await responsaveisModel.destroy({ where: {}, truncate: true, cascade: true });
     await turmaModel.destroy({ where: {}, truncate: true, cascade: true });
 
-    console.log('✅ Seed DOWN executado (dados removidos).');
+    console.log(' Seed DOWN executado (dados removidos).');
   } catch (error) {
-    console.error('❌ Erro no seed DOWN:', error);
+    console.error(' Erro no seed DOWN:', error);
   }
 }

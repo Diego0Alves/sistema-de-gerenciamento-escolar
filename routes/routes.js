@@ -25,7 +25,6 @@ export default (function () {
     ////
     router.use('/', web);
 
-    /** Se nenhuma rota for encontrada, 404 neles! */
     router.use((request, response) => {
         response.status(CONSTANTS.HTTP.NOT_FOUND).json({ error: "Not found" });
     });

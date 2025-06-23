@@ -1,5 +1,4 @@
 import professoresModel from '../../Models/ProfessoresModel.js';
-import turmasModel from '../../Models/TurmasModel.js';
 
 //@openapi({
 //    tags : ["Professores"],

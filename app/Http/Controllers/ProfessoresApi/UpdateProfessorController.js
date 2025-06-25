@@ -1,4 +1,4 @@
-import professoresModel from '../../Models/ProfessoresModel.js';
+import professoresModel from '../../../Models/professoresModel.js';
 
 //@openapi({
 //    tags : ["Professores"],
@@ -35,28 +35,48 @@ import professoresModel from '../../Models/ProfessoresModel.js';
 //    },
 //})
 
-export default class UpdateProfessorController {
-    static async handle(request, response) {
-        const { id } = request.params;
-        const { nome, email, telefone } = request.body;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-        try {
-            const professor = await professoresModel.findByPk(id);
+  const id = request.params.id;
 
-            if (!professor) {
-                return response.status(404).json({ message: "Professor not found" });
-            }
+  const requestBody = request.body;
+  const nome = requestBody.nome;
+  const disciplina = requestBody.disciplina;
+  const turma_id = requestBody.turma_id;
 
-            // Update professor details
-            await professoresModel.update(
-                { nome, email, telefone },
-                { where: { id } }
-            );
+  const data = {};
 
-            return response.status(200).json({ message: "Professor updated successfully" });
-        } catch (error) {
-            console.error("Error updating professor:", error);
-            return response.status(500).json({ message: "Internal server error" });
-        }
+  if (nome !== undefined) data.nome = nome;
+  if (disciplina !== undefined) data.disciplina = disciplina;
+  if (turma_id !== undefined) data.turma_id = turma_id;
+
+  if (Object.keys(data).length === 0) {
+    return response.status(HTTP_STATUS.BAD_REQUEST).json({
+      error: "Nenhum campo para atualizar",
+    });
+  }
+
+  try {
+    const [rowsAffected] = await professoresModel.update(
+      data,
+      {
+        where: {
+          id: id
+        },
+        returning: true
+      }
+    );
+    if (rowsAffected === 0) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Professor não encontrado",
+      });
     }
-}
+
+    return response.status(HTTP_STATUS.SUCCESS).json(row);
+  } catch (error) {
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
+  }
+};

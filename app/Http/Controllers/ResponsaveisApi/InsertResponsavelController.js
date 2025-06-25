@@ -1,23 +1,30 @@
-import responsaveisModel from "../../../Models/responsaveisModel";
+import responsaveisModel from "../../../Models/responsaveisModel.js";
 
-export default class InsertResponsavelController {
-  async handle(request, response) {
-    const { nome, email, telefone, alunoId } = request.body;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
+  const { nome, data_nascimento, email, telefone, aluno_id } = request.body;
 
-    // Verifica se o aluno existe
-    const aluno = await responsaveisModel.findByPk(alunoId);
-    if (!aluno) {
-      return response.status(404).json({ error: "Aluno não encontrado" });
-    }
+  // Validação simples
+  if (!nome || !data_nascimento || !email || !telefone || !aluno_id) {
+    return response.status(HTTP_STATUS.BAD_REQUEST).json({
+      error: "Campos obrigatórios: nome, data_nascimento, email, telefone, aluno_id"
+    });
+  }
 
-    // Insere o novo responsável
-    const responsavel = await responsaveisModel.create({
+  try {
+    const novoResponsavel = await responsaveisModel.create({
       nome,
+      data_nascimento,
       email,
       telefone,
-      alunoId,
+      aluno_id
     });
 
-    return response.status(201).json(responsavel);
+    return response.status(HTTP_STATUS.CREATED).json(novoResponsavel);
+  } catch (error) {
+    console.error("Erro ao inserir responsável:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor"
+    });
   }
-}
+};

@@ -1,4 +1,4 @@
-import professoresModel from '../../Models/ProfessoresModel.js';
+import professoresModel from '../../../Models/professoresModel.js';
 
 //@openapi({
 //    tags : ["Professores"],
@@ -24,27 +24,32 @@ import professoresModel from '../../Models/ProfessoresModel.js';
 //    },
 //})
 
-export default class InsertProfessorController {
-    static async handle(request, response) {
-        const { nome, email, telefone } = request.body;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
+  const { nome, data_nascimento, email, disciplina, senha, turma_id } = request.body;
 
-        try {
-            // Validate input
-            if (!nome || !email || !telefone) {
-                return response.status(400).json({ message: "Invalid request" });
-            }
+  // Validação simples
+  if (!nome || !data_nascimento || !email || !disciplina || !senha || !turma_id) {
+    return response.status(HTTP_STATUS.BAD_REQUEST).json({
+      error: "Campos obrigatórios: nome, data_nascimento, email, disciplina, senha, turma_id"
+    });
+  }
 
-            // Create new professor
-            const newProfessor = await professoresModel.create({
-                nome,
-                email,
-                telefone,
-            });
+  try {
+    const novoProfessor = await professoresModel.create({
+      nome,
+      data_nascimento,
+      email,
+      disciplina,
+      senha,
+      turma_id
+    });
 
-            return response.status(201).json(newProfessor);
-        } catch (error) {
-            console.error("Error inserting professor:", error);
-            return response.status(500).json({ message: "Internal server error" });
-        }
-    }
-}
+    return response.status(HTTP_STATUS.CREATED).json(novoProfessor);
+  } catch (error) {
+    console.error("Erro ao inserir professor:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor"
+    });
+  }
+};

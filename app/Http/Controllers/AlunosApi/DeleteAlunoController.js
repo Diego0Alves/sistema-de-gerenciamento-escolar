@@ -1,4 +1,4 @@
-import alunosModel from "../../../Models/alunosModel";
+import alunosModel from "../../../Models/alunosModel.js";
 
 //@openapi({
 //  tags: ["Alunos"],
@@ -25,22 +25,27 @@ import alunosModel from "../../../Models/alunosModel";
 //  },
 //});
 
-export default class DeleteAlunoController {
-  static async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const aluno = await alunosModel.findByPk(id);
+  const id = request.params.id;
 
-      if (!aluno) {
-        return response.status(404).json({ message: "Aluno not found" });
-      }
+  try {
+    const rowsDeleted = await alunosModel.destroy({
+      where: { id },
+    });
 
-      await aluno.destroy();
-      return response.status(204).send();
-    } catch (error) {
-      console.error("Error deleting aluno:", error);
-      return response.status(500).json({ message: "Internal server error" });
+    if (rowsDeleted === 0) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Aluno não encontrado",
+      });
     }
+    return response.status(HTTP_STATUS.NO_CONTENT).send();
+  } catch (error) {
+    console.error("Erro ao deletar aluno:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+
+};

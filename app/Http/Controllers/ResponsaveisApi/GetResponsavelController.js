@@ -1,20 +1,25 @@
-import responsaveisModel from "../../../Models/responsaveisModel";
+import responsaveisModel from "../../../Models/responsaveisModel.js";
 
-export default class GetResponsavelController {
-  async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const responsavel = await responsaveisModel.findByPk(id);
+  const id = request.params.id;
 
-      if (!responsavel) {
-        return response.status(404).json({ error: "Responsável não encontrado" });
-      }
+  try {
+    const row = await responsaveisModel.findByPk(id);
 
-      return response.status(200).json(responsavel);
-    } catch (error) {
-      console.error("Erro ao buscar responsável:", error);
-      return response.status(500).json({ error: "Erro interno do servidor" });
+    if (row === null) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Responsável não encontrado",
+      });
     }
+
+    return response.status(HTTP_STATUS.SUCCESS).json(row);
+
+  } catch (error) {
+    console.error("Erro ao buscar responsável:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+};

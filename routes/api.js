@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import alunosApi from './api/alunosApi';
-import professoresApi from './api/professoresApi';
-import turmasApi from './api/turmasApi';
-import responsaveisApi from './api/responsaveisApi';
+import alunosApi from './api/alunosApi.js';
+import professoresApi from './api/professoresApi.js';
+import turmasApi from './api/turmasApi.js';
+import responsaveisApi from './api/responsaveisApi.js';
 
 export default (function () {
 

@@ -1,23 +1,26 @@
-import responsaveisModel from "../../../Models/responsaveisModel";
+import responsaveisModel from "../../../Models/responsaveisModel.js";
 
-export default class DeleteResponsavelController {
-  async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      // Verifica se o responsável existe
-      const responsavel = await responsaveisModel.findByPk(id);
-      if (!responsavel) {
-        return response.status(404).json({ error: "Responsável não encontrado" });
-      }
+  const id = request.params.id;
 
-      // Exclui o responsável
-      await responsaveisModel.destroy({ where: { id } });
+  try {
+    const rowsDeleted = await responsaveisModel.destroy({
+      where: { id },
+    });
 
-      return response.status(200).json({ message: "Responsável excluído com sucesso" });
-    } catch (error) {
-      console.error("Erro ao excluir responsável:", error);
-      return response.status(500).json({ error: "Erro ao excluir responsável" });
+    if (rowsDeleted === 0) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Responsável não encontrado",
+      });
     }
+    return response.status(HTTP_STATUS.NO_CONTENT).send();
+  } catch (error) {
+    console.error("Erro ao deletar responsável:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+
+};

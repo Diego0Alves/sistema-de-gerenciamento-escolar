@@ -1,26 +1,42 @@
-import turmasModel from "../../../Models/turmasModel";
+import turmasModel from "../../../Models/turmasModel.js";
 
-export default class UpdateTurmaController {
-  async handle(request, response) {
-    const { id } = request.params;
-    const { nome, descricao, dataInicio, dataFim } = request.body;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const turma = await turmasModel.findByPk(id);
+  const id = request.params.id;
 
-      if (!turma) {
-        return response.status(404).json({ error: "Turma não encontrada" });
-      }
+  const nome = requestBody.nome;
 
-      await turmasModel.update(
-        { nome, descricao, dataInicio, dataFim },
-        { where: { id } }
-      );
+  const data = {};
 
-      return response.status(200).json({ message: "Turma atualizada com sucesso" });
-    } catch (error) {
-      console.error("Erro ao atualizar turma:", error);
-      return response.status(500).json({ error: "Erro ao atualizar turma" });
-    }
+  if (nome !== undefined) data.nome = nome;
+
+  if (Object.keys(data).length === 0) {
+    return response.status(HTTP_STATUS.BAD_REQUEST).json({
+      error: "Nenhum campo para atualizar",
+    });
   }
-}
+
+  try {
+    const [rowsAffected] = await turmasModel.update(
+      data,
+      {
+        where: {
+          id: id
+        },
+        returning: true
+      }
+    );
+    if (rowsAffected === 0) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Turma não encontrada",
+      });
+    }
+
+    return response.status(HTTP_STATUS.SUCCESS).json(row);
+  } catch (error) {
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
+  }
+};

@@ -1,4 +1,4 @@
-import alunosModel from "../../../Models/alunosModel";
+import alunosModel from "../../../Models/alunosModel.js";
 
 //@openapi({
 //  tags: ["Alunos"],
@@ -31,29 +31,30 @@ import alunosModel from "../../../Models/alunosModel";
 //  },
 //});
 
-export default class InsertAlunoController {
-  static async handle(request, response) {
-    const { nome, email, telefone, responsavelId, turmaId } = request.body;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
+  const { nome, data_nascimento, responsavel_id, turma_id } = request.body;
 
-    try {
-      // Validate required fields
-      if (!nome || !email || !responsavelId || !turmaId) {
-        return response.status(400).json({ message: "Missing required fields" });
-      }
-
-      // Create new aluno
-      const newAluno = await alunosModel.create({
-        nome,
-        email,
-        telefone,
-        responsavelId,
-        turmaId,
-      });
-
-      return response.status(201).json(newAluno);
-    } catch (error) {
-      console.error("Error creating aluno:", error);
-      return response.status(500).json({ message: "Internal server error" });
-    }
+  // Validação simples
+  if (!nome || !data_nascimento || !responsavel_id || !turma_id) {
+    return response.status(HTTP_STATUS.BAD_REQUEST).json({
+      error: "Campos obrigatórios: nome, data_nascimento, responsavel_id, turma_id"
+    });
   }
-}
+
+  try {
+    const novoAluno = await alunosModel.create({
+      nome,
+      data_nascimento,
+      responsavel_id,
+      turma_id
+    });
+
+    return response.status(HTTP_STATUS.CREATED).json(novoAluno);
+  } catch (error) {
+    console.error("Erro ao inserir aluno:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor"
+    });
+  }
+};

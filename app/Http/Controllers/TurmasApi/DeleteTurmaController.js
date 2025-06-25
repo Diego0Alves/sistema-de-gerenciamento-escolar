@@ -1,21 +1,26 @@
-import turmasModel from "../../../Models/turmasModel";
+import turmasModel from "../../../Models/turmasModel.js";
 
-export default class DeleteTurmaController {
-  async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const turma = await turmasModel.findByPk(id);
+  const id = request.params.id;
 
-      if (!turma) {
-        return response.status(404).json({ error: "Turma não encontrada" });
-      }
+  try {
+    const rowsDeleted = await turmasModel.destroy({
+      where: { id },
+    });
 
-      await turma.destroy();
-      return response.status(200).json({ message: "Turma deletada com sucesso" });
-    } catch (error) {
-      console.error("Erro ao deletar turma:", error);
-      return response.status(500).json({ error: "Erro ao deletar turma" });
+    if (rowsDeleted === 0) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Turma não encontrada",
+      });
     }
+    return response.status(HTTP_STATUS.NO_CONTENT).send();
+  } catch (error) {
+    console.error("Erro ao deletar turma:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+
+};

@@ -1,4 +1,4 @@
-import professoresModel from '../../Models/ProfessoresModel.js';
+import professoresModel from '../../../Models/professoresModel.js';
 
 //@openapi({
 //    tags: ["Professores"],
@@ -32,28 +32,26 @@ import professoresModel from '../../Models/ProfessoresModel.js';
 //    },
 //})
 
-export default class GetProfessorController {
-  static async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const professor = await professoresModel.findByPk(id, {
-        include: [
-          {
-            model: turmasModel,
-            as: 'turmas',
-          },
-        ],
+  const id = request.params.id;
+
+  try {
+    const row = await professoresModel.findByPk(id);
+
+    if (row === null) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Professor não encontrado",
       });
-
-      if (!professor) {
-        return response.status(404).json({ message: "Professor not found" });
-      }
-
-      return response.status(200).json(professor);
-    } catch (error) {
-      console.error("Error retrieving professor:", error);
-      return response.status(500).json({ message: "Internal server error" });
     }
+
+    return response.status(HTTP_STATUS.SUCCESS).json(row);
+
+  } catch (error) {
+    console.error("Erro ao buscar professor:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+};

@@ -10,19 +10,19 @@ export default (function () {
     const router = Router();
 
     // Listar professores
-    router.get("/professores", ListProfessorController.handle);
+    router.get("/professores", ListProfessorController);
 
     // Obter professor por ID
-    router.get("/professores/:id", GetProfessorController.handle);
+    router.get("/professores/:id", GetProfessorController);
 
     // Inserir novo professor
-    router.post("/professores", InsertProfessorController.handle);
+    router.post("/professores", InsertProfessorController);
 
     // Atualizar professor existente
-    router.put("/professores/:id", UpdateProfessorController.handle);
+    router.put("/professores/:id", UpdateProfessorController);
 
     // Deletar professor
-    router.delete("/professores/:id", DeleteProfessorController.handle);
+    router.delete("/professores/:id", DeleteProfessorController);
 
     return router;
 

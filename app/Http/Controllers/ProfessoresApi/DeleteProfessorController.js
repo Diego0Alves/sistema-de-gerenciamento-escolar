@@ -1,4 +1,4 @@
-import professoresModel from '../../Models/ProfessoresModel.js';
+import professoresModel from '../../../Models/professoresModel.js';
 
 //@openapi({
 //  tags: ["Professores"],
@@ -25,35 +25,27 @@ import professoresModel from '../../Models/ProfessoresModel.js';
 //  },
 //})
 
-export default class DeleteProfessorController {
-  static async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const professor = await professoresModel.findByPk(id);
+  const id = request.params.id;
 
-      if (!professor) {
-        return response.status(404).json({ message: "Professor not found" });
-      }
+  try {
+    const rowsDeleted = await professoresModel.destroy({
+      where: { id },
+    });
 
-      // Check if the professor is associated with any turmas
-      const turmas = await turmasModel.findAll({
-        where: { professorId: id },
+    if (rowsDeleted === 0) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Professor não encontrado",
       });
-
-      if (turmas.length > 0) {
-        return response.status(400).json({
-          message: "Cannot delete professor with associated turmas",
-        });
-      }
-
-      // Delete the professor
-      await professoresModel.destroy({ where: { id } });
-
-      return response.status(200).json({ message: "Professor deleted successfully" });
-    } catch (error) {
-      console.error("Error deleting professor:", error);
-      return response.status(500).json({ message: "Internal server error" });
     }
+    return response.status(HTTP_STATUS.NO_CONTENT).send();
+  } catch (error) {
+    console.error("Erro ao deletar professor:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+
+};

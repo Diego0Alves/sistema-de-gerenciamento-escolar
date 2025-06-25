@@ -12,6 +12,10 @@ export default (function () {
                 primaryKey: true,
                 allowNull: false
             },
+            nome: {
+                type: DataTypes.STRING(100),
+                allowNull: false
+            },
         },
         {
             tableName: "turmas",

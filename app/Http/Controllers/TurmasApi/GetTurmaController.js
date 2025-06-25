@@ -1,20 +1,25 @@
-import turmasModel from "../../../Models/turmasModel";
+import turmasModel from "../../../Models/turmasModel.js";
 
-export default class GetTurmaController {
-  async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const turma = await turmasModel.findByPk(id);
+  const id = request.params.id;
 
-      if (!turma) {
-        return response.status(404).json({ error: "Turma não encontrada" });
-      }
+  try {
+    const row = await turmasModel.findByPk(id);
 
-      return response.status(200).json(turma);
-    } catch (error) {
-      console.error("Erro ao obter turma:", error);
-      return response.status(500).json({ error: "Erro ao obter turma" });
+    if (row === null) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Turma não encontrada",
+      });
     }
+
+    return response.status(HTTP_STATUS.SUCCESS).json(row);
+
+  } catch (error) {
+    console.error("Erro ao buscar turma:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+};

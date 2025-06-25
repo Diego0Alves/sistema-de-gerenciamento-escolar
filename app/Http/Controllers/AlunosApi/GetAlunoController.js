@@ -1,4 +1,4 @@
-import alunosModel from "../../../Models/alunosModel";
+import alunosModel from "../../../Models/alunosModel.js";
 
 //@openapi({
 //  tags: ["Alunos"],
@@ -32,23 +32,26 @@ import alunosModel from "../../../Models/alunosModel";
 //  },
 //});
 
-export default class GetAlunoController {
-  static async handle(request, response) {
-    const { id } = request.params;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      const aluno = await alunosModel.findByPk(id, {
-        include: ["responsavel", "turma"],
+  const id = request.params.id;
+
+  try {
+    const row = await alunosModel.findByPk(id);
+
+    if (row === null) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Aluno não encontrado",
       });
-
-      if (!aluno) {
-        return response.status(404).json({ message: "Aluno not found" });
-      }
-
-      return response.status(200).json(aluno);
-    } catch (error) {
-      console.error("Error retrieving aluno:", error);
-      return response.status(500).json({ message: "Internal server error" });
     }
+
+    return response.status(HTTP_STATUS.SUCCESS).json(row);
+
+  } catch (error) {
+    console.error("Erro ao buscar aluno:", error);
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
   }
-}
+};

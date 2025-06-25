@@ -1,27 +1,47 @@
-import responsaveisModel from "../../../Models/responsaveisModel";
+import responsaveisModel from "../../../Models/responsaveisModel.js";
 
-export default class UpdateResponsavelController {
-  async handle(request, response) {
-    const { id } = request.params;
-    const { nome, email, telefone, alunoId } = request.body;
+export default async (request, response) => {
+  const HTTP_STATUS = CONSTANTS.HTTP;
 
-    try {
-      // Verifica se o responsável existe
-      const responsavel = await responsaveisModel.findByPk(id);
-      if (!responsavel) {
-        return response.status(404).json({ error: "Responsável não encontrado" });
-      }
+  const id = request.params.id;
 
-      // Atualiza os dados do responsável
-      await responsaveisModel.update(
-        { nome, email, telefone, alunoId },
-        { where: { id } }
-      );
+  const requestBody = request.body;
+  const nome = requestBody.nome;
+  const telefone = requestBody.telefone;
+  const email = requestBody.email;
 
-      return response.status(200).json({ message: "Responsável atualizado com sucesso" });
-    } catch (error) {
-      console.error("Erro ao atualizar responsável:", error);
-      return response.status(500).json({ error: "Erro ao atualizar responsável" });
-    }
+  const data = {};
+
+  if (nome !== undefined) data.nome = nome;
+  if (telefone !== undefined) data.telefone = telefone;
+  if (email !== undefined) data.email = email;
+
+  if (Object.keys(data).length === 0) {
+    return response.status(HTTP_STATUS.BAD_REQUEST).json({
+      error: "Nenhum campo para atualizar",
+    });
   }
-}
+
+  try {
+    const [rowsAffected] = await responsaveisModel.update(
+      data,
+      {
+        where: {
+          id: id
+        },
+        returning: true
+      }
+    );
+    if (rowsAffected === 0) {
+      return response.status(HTTP_STATUS.NOT_FOUND).json({
+        error: "Responsável não encontrado",
+      });
+    }
+
+    return response.status(HTTP_STATUS.SUCCESS).json(row);
+  } catch (error) {
+    return response.status(HTTP_STATUS.SERVER_ERROR).json({
+      error: "Erro interno do servidor",
+    });
+  }
+};

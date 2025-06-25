@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import professoresModel from '../../Models/professoresModel';
+import userModel from '../../Models/userModel.js';
 import { request } from 'express';
 
 export default async (request, response) => {
@@ -12,7 +12,7 @@ export default async (request, response) => {
     const JWT_EXPIRES = '10m';
 
     try {
-        const user = await professoresModel.findOne({
+        const user = await userModel.findOne({
             where: {
                 email: email
             },

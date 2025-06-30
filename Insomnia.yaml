@@ -1,0 +1,642 @@
+type: collection.insomnia.rest/5.0
+name: gerenciamento-escolar
+meta:
+  id: wrk_63a1756bbbe24c34b33e8b24b867c262
+  created: 1751268361121
+  modified: 1751268361121
+collection:
+  - name: Alunos
+    meta:
+      id: fld_54495c61969443a3a6f84165cc968072
+      created: 1751247993201
+      modified: 1751255734772
+      sortKey: -1751247993297.0938
+    children:
+      - url: localhost:8080/api/alunos
+        name: Listar
+        meta:
+          id: req_5a073b10727940e99205feb78af6be9a
+          created: 1751247996608
+          modified: 1751312764720
+          isPrivate: false
+          sortKey: -1751249281505
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/api/alunos/1
+        name: Ver 1
+        meta:
+          id: req_9b80e0787e1e4cad86494349e5133464
+          created: 1751248392557
+          modified: 1751312728442
+          isPrivate: false
+          sortKey: -1751249281405
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/api/alunos/3
+        name: Atualizar
+        meta:
+          id: req_ed1eafc0e72740f7939bd6e67e88dc3e
+          created: 1751248953720
+          modified: 1751313668655
+          isPrivate: false
+          sortKey: -1751249275679
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "André da Silva",
+              "turma_id": 2
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/api/alunos/1
+        name: Deletar
+        meta:
+          id: req_c4cab744892a4111ab727638b5c70ae2
+          created: 1751249270053
+          modified: 1751312751489
+          isPrivate: false
+          sortKey: -1751249270053
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: localhost:8080/api/alunos
+        name: Inserir
+        meta:
+          id: req_53e1ba892ba04db3b20de32da6c79032
+          created: 1751249281305
+          modified: 1751269349824
+          isPrivate: false
+          sortKey: -1751249281305
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "André",
+            	"data_nascimento": "2000-01-02" ,
+            	"responsavel_id": 1 ,
+            	"turma_id": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Professores
+    meta:
+      id: fld_be1fb33181974db982dd73993a8d88ad
+      created: 1751250062006
+      modified: 1751255732026
+      sortKey: -1751247993296.3125
+    children:
+      - url: http://localhost:8080/api/professores
+        name: Listar
+        meta:
+          id: req_7802fbaf2b384091ba831cd895921477
+          created: 1751250086961
+          modified: 1751313717580
+          isPrivate: false
+          sortKey: -1751255432747
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/professores/1
+        name: Ver 1
+        meta:
+          id: req_017c91e6f8e94784ac92c5f35910f230
+          created: 1751250231884
+          modified: 1751313715672
+          isPrivate: false
+          sortKey: -1751255424981
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/professores
+        name: Inserir
+        meta:
+          id: req_2368658e852743caab298668ee04762b
+          created: 1751250258773
+          modified: 1751313721584
+          isPrivate: false
+          sortKey: -1751255421148
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Maria",
+              "data_nascimento": "1985-09-20",
+              "email": "maria.oliveira@email.com",
+              "disciplina": "História",
+              "senha": "senha123",
+              "turma_id": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/professores/3
+        name: Atualizar
+        meta:
+          id: req_ce7c512f27ef4407bd96aa2e0e8738ba
+          created: 1751255417315
+          modified: 1751313673445
+          isPrivate: false
+          sortKey: -1751255417315
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Maria Oliveira Atualizada",
+              "disciplina": "Geografia",
+              "turma_id": 2
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/professores/1
+        name: Deletar
+        meta:
+          id: req_3c1bfa68363d4e5caac673aa3a9e60a2
+          created: 1751255432647
+          modified: 1751313719090
+          isPrivate: false
+          sortKey: -1751250258673
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Turmas
+    meta:
+      id: fld_23d4b43bea7f4f0cb75bebbb98294e3f
+      created: 1751255454932
+      modified: 1751255727473
+      sortKey: -1751247993297.875
+    children:
+      - url: http://localhost:8080/api/turmas
+        name: Listar
+        meta:
+          id: req_b2059c5a4c054c02be5b68cf1e9e9620
+          created: 1751255460741
+          modified: 1751313735806
+          isPrivate: false
+          sortKey: -1751255628012
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/turmas/1
+        name: Ver 1
+        meta:
+          id: req_70ea2e127dde4b72b6b21960f481531b
+          created: 1751255505412
+          modified: 1751313737555
+          isPrivate: false
+          sortKey: -1751255627962
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/turmas
+        name: Inserir
+        meta:
+          id: req_f7688db903ad490da29345fb0e3baa8a
+          created: 1751255587504
+          modified: 1751313739081
+          isPrivate: false
+          sortKey: -1751255627937
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Turma C"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/turmas/3
+        name: Atualizar
+        meta:
+          id: req_370bc74d61bd41cea94e543bf55e9df7
+          created: 1751255608173
+          modified: 1751313740492
+          isPrivate: false
+          sortKey: -1751255627924.5
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Turma C-1"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/turmas/1
+        name: New Request
+        meta:
+          id: req_035bb814c27a46a28aa675cd972d1fd3
+          created: 1751255627912
+          modified: 1751269334136
+          isPrivate: false
+          sortKey: -1751255627912
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Responsáveis
+    meta:
+      id: fld_0cdd71f5a1d34067a3da190733d45c96
+      created: 1751255693499
+      modified: 1751255736702
+      sortKey: -1751247993296.7031
+    children:
+      - url: http://localhost:8080/api/responsaveis/1
+        name: Ver 1
+        meta:
+          id: req_0299523b1f6543289e698003418db080
+          created: 1751255741346
+          modified: 1751313690313
+          isPrivate: false
+          sortKey: -1751255839047
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/responsaveis
+        name: Listar
+        meta:
+          id: req_52fb60696b234d1eb721b0bcf97cd1b3
+          created: 1751255785647
+          modified: 1751313688431
+          isPrivate: false
+          sortKey: -1751255839097
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/responsaveis/1
+        name: Deletar
+        meta:
+          id: req_d424daac627e46cbaaa137b7ee1c00eb
+          created: 1751255799872
+          modified: 1751269362062
+          isPrivate: false
+          sortKey: -1751255799872
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/responsaveis
+        name: Inserir
+        meta:
+          id: req_d8c1446fa09a4db8bee3ce70b41a6523
+          created: 1751255819043
+          modified: 1751313706856
+          isPrivate: false
+          sortKey: -1751255839022
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Carlos",
+              "data_nascimento": "1970-01-01",
+              "email": "carlos.souza@email.com",
+              "telefone": "11999999999",
+              "aluno_id": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/api/responsaveis/3
+        name: Atualizar
+        meta:
+          id: req_18009e7159a2448b97363950532987dd
+          created: 1751255838997
+          modified: 1751313678902
+          isPrivate: false
+          sortKey: -1751255838997
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Carlos Souza",
+              "telefone": "11888888888",
+              "email": "carlos.souza.novo@email.com"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.1.0
+        authentication:
+          type: bearer
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - url: http://localhost:8080/user-test
+    name: "Criar users com roles "
+    meta:
+      id: req_ac4baf06a9c14e0caf16d5baeaf5b3cd
+      created: 1751246797375
+      modified: 1751249484108
+      isPrivate: false
+      sortKey: -1751247993301
+    method: POST
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080/login
+    name: Login para obter o token JWT
+    meta:
+      id: req_ef9104ba81824ebb97861d6bc3325942
+      created: 1751249430369
+      modified: 1751249559495
+      isPrivate: false
+      sortKey: -1751249430369
+    method: POST
+    body:
+      mimeType: multipart/form-data
+      params:
+        - name: email
+          value: user1@mail.com
+          disabled: false
+          id: pair_c55b8e27b6c74472925369e276445268
+        - name: senha
+          value: "123456"
+          disabled: false
+          id: pair_df41bd42f2b0439ab2a70bfcc8ef0e5b
+    headers:
+      - name: Content-Type
+        value: multipart/form-data
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:8080
+    name: Home
+    meta:
+      id: req_5e3fb18d29354e4d95893ab78233fb69
+      created: 1751249490706
+      modified: 1751249579283
+      isPrivate: false
+      sortKey: -1751249490706
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.1.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_8d0d4aba8a6a554f6bc68637acd5025da2917f52
+    created: 1751268361124
+    modified: 1751268361124
+environments:
+  name: Base Environment
+  meta:
+    id: env_8d0d4aba8a6a554f6bc68637acd5025da2917f52
+    created: 1751268361122
+    modified: 1751268361122
+    isPrivate: false

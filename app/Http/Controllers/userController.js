@@ -1,13 +1,13 @@
 import bcrypt from 'bcrypt';
-import UserModel from '../../Models/UserModel.js';
+import UserModel from '../../Models/userModel.js';
 
 export default async (request, response) => {
     const defaultPassword = "123456";
 
-    // Mock data para os usuários
+    // Mock data
     const users = [
-        { nome: 'User1', email: 'user1@example.com', id_role: 2 },
-        { nome: 'User2', email: 'user2@example.com', id_role: 1 },
+        { nome: 'User1', email: 'user1@mail.com', id_role: 2 },
+        { nome: 'User2', email: 'user2@mail.com', id_role: 1 },
     ];
 
 

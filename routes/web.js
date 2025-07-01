@@ -4,7 +4,7 @@ import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 
 import DateController from '../app/Http/Controllers/DateController.js';
-//import swaggerGenerate from '../Core/SwaggerCore/swaggerGenerate.js';
+import swaggerGenerate from '../Core/SwaggerCore/SwaggerGenerate.js';
 
 export default (function () {
 
@@ -13,7 +13,7 @@ export default (function () {
     router.use(express.static(path.join(CONSTANTS.DIR, 'public')));
 
     // Swagger
-    //router.use('/swagger', swaggerUi.serve, swaggerGenerate);
+    router.use('/swagger', swaggerUi.serve, swaggerGenerate);
 
     router.get('/date', DateController);
 

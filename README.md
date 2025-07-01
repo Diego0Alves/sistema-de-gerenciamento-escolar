@@ -1,6 +1,10 @@
 # Sistema de Gerenciamento Escolar
 
-## Iniciando o APP
+### Para mais informações veja a wiki:
+
+- [Sistema de Gerenciamento Escolar Wiki](https://github.com/Diego0Alves/sistema-de-gerenciamento-escolar/wiki)
+
+## Iniciando o APP com Docker
 
 - Clone o repo
 
@@ -57,7 +61,7 @@ JWT_SECRET=
 
 - [localhost:8080](http://localhost:8080/)
 
-> Acesse o banco de dados na porta 6789 seguindo os dados inseridos no .env
+> Acesse o banco de dados na porta 6789 com um SGBD seguindo os dados inseridos no .env
 
 > Documentação da api no Swagger em:
 

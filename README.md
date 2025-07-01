@@ -124,6 +124,7 @@ JWT_SECRET=
         └── SwaggerCore
             ├── CreateSwaggerDocs.js
             ├── SwaggerGenerate.js
+        ├── GetFiles.js
     └── database
         └── migrations
             ├── create_alunos_table.js
@@ -143,7 +144,11 @@ JWT_SECRET=
                 ├── 01-init.sql
                 ├── 02-insert.sql
     └── docs
-        ├── 01-ProfLoginDoc.js
+        ├── 01-UserLoginDoc.js
+        ├── 02-AlunosDoc.js
+        ├── 03-TurmasDoc.js
+        ├── 04-ProfessoresDoc.js
+        ├── 05-ResponsaveisDoc.js
     └── MER-DER
         ├── MER-Escola.png
     └── public

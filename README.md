@@ -45,10 +45,14 @@ JWT_SECRET=
     ```
 
 > Acesse o serviço em:
-    [localhost:8080](http://localhost:8080/)
+
+- [localhost:8080](http://localhost:8080/)
+
 > Acesse o banco de dados na porta 6789 seguindo os dados inseridos no .env
+
 > Documentação do Swagger em:
-    [localhost:808/swagger](http://localhost:8080/swagger/)
+
+- [localhost:808/swagger](http://localhost:8080/swagger/)
 
 ## DER/MER do Banco de Dados:
 

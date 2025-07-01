@@ -73,7 +73,7 @@ JWT_SECRET=
 
 ## DER/MER do Banco de Dados:
 
-![MER](./DOCs-//MER-DER/MER-Escola.png)
+![MER](./Docs-//MER-DER/MER-Escola.png)
 
 | Entidade    | Relacionamento    | Entidade  | Cardinalidade  |
 | ----------- | ----------------- | --------- | -------------- |

@@ -17,3 +17,8 @@ INSERT INTO alunos (nome, data_nascimento, responsavel_id, turma_id) VALUES
 INSERT INTO professores (nome, data_nascimento, disciplina, email, senha, turma_id) VALUES
 ('Carlos Lima', '1980-03-15', 'Matemática', 'carlos.lima@email.com', 'senha123', 1),
 ('Fernanda Alves', '1975-07-30', 'Português', 'fernanda.alves@email.com', 'senha456', 2);
+
+-- INSERT INTO users (nome, id_role, email, senha, foto)
+-- VALUES
+-- ('Administrador', 1, 'teste1@mail.com', '123456', NULL),
+-- ('Usuário Comum', 2, 'teste2@mail.com', '123456', NULL);

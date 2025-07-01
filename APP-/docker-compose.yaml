@@ -55,7 +55,7 @@ services:
         aliases:
             - web_host
 
-  #POSTGRES
+  #POSTGRESQL
   postgres:
     image: postgres:17
     restart: unless-stopped
@@ -73,9 +73,6 @@ services:
       project-network:
         aliases:
           - postgres_host
-
-
-#OTHERS
 
 networks:
   project-network:

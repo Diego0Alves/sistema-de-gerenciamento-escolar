@@ -2,9 +2,10 @@
 
 ## Iniciando o APP
 
-- Clone o repo 
+- Clone o repo
 
     ```sh
+
     git clone https://github.com/Diego0Alves/sistema-de-gerenciamento-escolar.git
     
     ```
@@ -14,6 +15,14 @@
     ```sh
 
     cd sistema-de-gerenciamento-escolar
+
+    ```
+
+- Entre no diretório do app
+
+    ```sh
+
+    cd APP-
 
     ```
 
@@ -50,13 +59,21 @@ JWT_SECRET=
 
 > Acesse o banco de dados na porta 6789 seguindo os dados inseridos no .env
 
-> Documentação do Swagger em:
+> Documentação da api no Swagger em:
 
 - [localhost:808/swagger](http://localhost:8080/swagger/)
 
+
+### As rotas estão documentadas através do arquivo: insomnia.yaml
+
+- Baixe o Insomnia para utilizar o arquivo: [Insomnia](https://insomnia.rest/download)
+
+> Arquivo Insomnia.yaml em: DOCs-/Insomnia.yaml
+
+
 ## DER/MER do Banco de Dados:
 
-![MER](./MER-DER/MER-Escola.png)
+![MER](./DOCs-//MER-DER/MER-Escola.png)
 
 | Entidade    | Relacionamento    | Entidade  | Cardinalidade  |
 | ----------- | ----------------- | --------- | -------------- |
@@ -64,111 +81,113 @@ JWT_SECRET=
 | Turma       | possui            | Aluno     | 1\:N           |
 | Turma       | é lecionada por   | Professor | 1:1 (ou N:1)   |
 
-### As rotas estão documentadas através do arquivo: insomnia.yaml
-
-- Baixe o Insomnia para utilizar o arquivo: [Insomnia](https://insomnia.rest/download)
-
 ### Estrutura de Pastas
 
 ```
 └── sistema-de-gerenciamento-escolar
-    └── app
-        └── Commands
-            ├── ListRoutesCommand.js
-        └── Http
-            └── Controllers
-                └── AlunosApi
-                    ├── DeleteAlunoController.js
-                    ├── GetAlunoController.js
-                    ├── InsertAlunoController.js
-                    ├── ListAlunoController.js
-                    ├── UpdateAlunoController.js
-                └── ProfessoresApi
-                    ├── DeleteProfessorController.js
-                    ├── GetProfessorController.js
-                    ├── InsertProfessorController.js
-                    ├── ListProfessorController.js
-                    ├── UpdateProfessorController.js
-                └── ResponsaveisApi
-                    ├── DeleteResponsavelController.js
-                    ├── GetResponsavelController.js
-                    ├── InsertResponsavelController.js
-                    ├── ListResponsavelController.js
-                    ├── UpdateResponsavelController.js
-                └── TurmasApi
-                    ├── DeleteTurmaController.js
-                    ├── GetTurmaController.js
-                    ├── InsertTurmaController.js
-                    ├── ListTurmaController.js
-                    ├── UpdateTurmaController.js
-                ├── dateController.js
-                ├── LoginJwtController.js
-                ├── userController.js
-            └── Middlewares
-                ├── jwtAuthMiddleware.js
-        └── Models
-            ├── alunosModel.js
-            ├── professoresModel.js
-            ├── responsaveisModel.js
-            ├── roleModel.js
-            ├── turmasModel.js
-            ├── userModel.js
-    └── bootstrap
-        ├── app.js
-        ├── constants.js
-        ├── helpers.js
-    └── Core
-        └── CommandCore
-            ├── CommandManager.js
-            ├── ListRoutes.js
-        └── SwaggerCore
-            ├── CreateSwaggerDocs.js
-            ├── SwaggerGenerate.js
-        ├── GetFiles.js
-    └── database
-        └── migrations
-            ├── create_alunos_table.js
-            ├── create_professores_table.js
-            ├── create_responsaveis_table.js
-            ├── create_turmas_table.js
-    └── docker
-        └── nginx
-            ├── default.conf
-            ├── dockerfile
-        └── node-cli
-            ├── dockerfile
-        └── node-web
-            ├── dockerfile.dev
-        └── postgres
-            └── init
-                ├── 01-init.sql
-                ├── 02-insert.sql
-    └── docs
-        ├── 01-UserLoginDoc.js
-        ├── 02-AlunosDoc.js
-        ├── 03-TurmasDoc.js
-        ├── 04-ProfessoresDoc.js
-        ├── 05-ResponsaveisDoc.js
-    └── MER-DER
-        ├── MER-Escola.png
-    └── public
-        ├── index.html
-    └── routes
-        └── api
-            ├── alunosApi.js
-            ├── professoresApi.js
-            ├── responsaveisApi.js
-            ├── turmasApi.js
-        ├── api.js
-        ├── routes.js
-        ├── web.js
-    ├── .env.example
-    ├── .gitignore
-    ├── command
-    ├── docker-compose.yaml
-    ├── Insomnia.yaml
-    ├── package-lock.json
-    ├── package.json
-    ├── README.md
-    └── server.js
+    └── APP-
+        └── app
+            └── Commands
+                ├── ListRoutesCommand.js
+            └── Http
+                └── Controllers
+                    └── AlunosApi
+                        ├── DeleteAlunoController.js
+                        ├── GetAlunoController.js
+                        ├── InsertAlunoController.js
+                        ├── ListAlunoController.js
+                        ├── UpdateAlunoController.js
+                    └── ProfessoresApi
+                        ├── DeleteProfessorController.js
+                        ├── GetProfessorController.js
+                        ├── InsertProfessorController.js
+                        ├── ListProfessorController.js
+                        ├── UpdateProfessorController.js
+                    └── ResponsaveisApi
+                        ├── DeleteResponsavelController.js
+                        ├── GetResponsavelController.js
+                        ├── InsertResponsavelController.js
+                        ├── ListResponsavelController.js
+                        ├── UpdateResponsavelController.js
+                    └── TurmasApi
+                        ├── DeleteTurmaController.js
+                        ├── GetTurmaController.js
+                        ├── InsertTurmaController.js
+                        ├── ListTurmaController.js
+                        ├── UpdateTurmaController.js
+                    ├── dateController.js
+                    ├── LoginJwtController.js
+                    ├── userController.js
+                └── Middlewares
+                    ├── jwtAuthMiddleware.js
+            └── Models
+                ├── alunosModel.js
+                ├── professoresModel.js
+                ├── responsaveisModel.js
+                ├── roleModel.js
+                ├── turmasModel.js
+                ├── userModel.js
+        └── bootstrap
+            ├── app.js
+            ├── constants.js
+            ├── helpers.js
+        └── config
+            ├── db.js
+            ├── sequelize_relations.js
+            ├── sequelize.js
+        └── Core
+            └── CommandCore
+                ├── CommandManager.js
+                ├── ListRoutes.js
+            └── SwaggerCore
+                ├── CreateSwaggerDocs.js
+                ├── SwaggerGenerate.js
+            ├── GetFiles.js
+        └── database
+            └── migrations
+                ├── create_alunos_table.js
+                ├── create_professores_table.js
+                ├── create_responsaveis_table.js
+                ├── create_turmas_table.js
+        └── docker
+            └── nginx
+                ├── default.conf
+                ├── dockerfile
+            └── node-cli
+                ├── dockerfile
+            └── node-web
+                ├── dockerfile.dev
+            └── postgres
+                └── init
+                    ├── 01-init.sql
+                    ├── 02-insert.sql
+        └── docs
+            ├── 01-UserLoginDoc.js
+            ├── 02-AlunosDoc.js
+            ├── 03-TurmasDoc.js
+            ├── 04-ProfessoresDoc.js
+            ├── 05-ResponsaveisDoc.js
+        └── public
+            ├── index.html
+        └── routes
+            └── api
+                ├── alunosApi.js
+                ├── professoresApi.js
+                ├── responsaveisApi.js
+                ├── turmasApi.js
+            ├── api.js
+            ├── routes.js
+            ├── web.js
+        ├── .env.example
+        ├── .gitignore
+        ├── command
+        ├── docker-compose.yaml
+        ├── package-lock.json
+        ├── package.json
+        ├── server.js
+    └── Docs-
+        └── MER-DER
+            ├── MER-Escola.png
+        ├── Insomnia.yaml
+    └── README.md
 ```

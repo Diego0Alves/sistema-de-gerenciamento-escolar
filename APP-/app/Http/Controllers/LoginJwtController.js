@@ -9,7 +9,7 @@ export default async (request, response) => {
     const senha = request.body.senha;
 
     const JWT_SECRET = process.env.JWT_SECRET;
-    const JWT_EXPIRES = '10m';
+    const JWT_EXPIRES = '60m';
 
     try {
         const user = await userModel.findOne({
@@ -24,8 +24,8 @@ export default async (request, response) => {
             return response.status(401).json({ message: 'Usuário Invalido' });
         }
 
-        const senhaValida = await bcrypt.compare(senha, user.senha);
-        
+        const senhaValida = senha === user.senha;
+
         if (!senhaValida) {
             return response.status(401).json({ message: 'Senha Invalida' });
         }

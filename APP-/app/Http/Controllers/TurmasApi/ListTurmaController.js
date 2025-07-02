@@ -23,12 +23,12 @@ export default async (request, response) => {
             include: [
                 {
                     model: alunosModel,
-                    as: "aluno",
+                    as: "alunos",
                     attributes: ["id", "nome"],
                 }
                 , {
                   model: professoresModel,
-                  as: "professor",
+                  as: "professores",
                   attributes: ["id", "nome", "disciplina"],
                 }
             ],
@@ -39,7 +39,7 @@ export default async (request, response) => {
     const rows = (hasMore) ? (data.slice(0, limit)) : (data);
     const next = (hasMore) ? (offset + limit) : (null);
 
-    return response.status(HTTP_STATUS.OK).json({
+    return response.status(HTTP_STATUS.SUCCESS).json({
         rows: rows,
         limit: limit,
         next: next

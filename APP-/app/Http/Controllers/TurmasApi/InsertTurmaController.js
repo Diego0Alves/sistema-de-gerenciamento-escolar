@@ -16,7 +16,7 @@ export default async (request, response) => {
       nome
     });
 
-    return response.status(HTTP_STATUS.CREATED).json(novaTurma);
+    return response.status(HTTP_STATUS.SUCCESS_CREATED).json(novaTurma);
   } catch (error) {
     console.error("Erro ao inserir turma:", error);
     return response.status(HTTP_STATUS.SERVER_ERROR).json({

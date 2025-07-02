@@ -15,7 +15,7 @@ export default async (request, response) => {
         error: "Responsável não encontrado",
       });
     }
-    return response.status(HTTP_STATUS.NO_CONTENT).send();
+    return response.status(HTTP_STATUS.SUCCESS_NO_CONTENT).send();
   } catch (error) {
     console.error("Erro ao deletar responsável:", error);
     return response.status(HTTP_STATUS.SERVER_ERROR).json({

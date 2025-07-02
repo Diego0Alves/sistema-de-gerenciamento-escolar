@@ -22,8 +22,8 @@ export default async (request, response) => {
             include: [
                 {
                     model: alunosModel,
-                    as: "aluno",
-                    attributes: ["id", "nome", "id_turma"],
+                    as: "alunos",
+                    attributes: ["id", "nome"],
                 }
             ],
     });
@@ -33,7 +33,7 @@ export default async (request, response) => {
     const rows = (hasMore) ? (data.slice(0, limit)) : (data);
     const next = (hasMore) ? (offset + limit) : (null);
 
-    return response.status(HTTP_STATUS.OK).json({
+    return response.status(HTTP_STATUS.SUCCESS).json({
         rows: rows,
         limit: limit,
         next: next

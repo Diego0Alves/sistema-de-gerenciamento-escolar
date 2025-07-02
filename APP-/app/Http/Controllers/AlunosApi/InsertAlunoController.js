@@ -50,7 +50,7 @@ export default async (request, response) => {
       turma_id
     });
 
-    return response.status(HTTP_STATUS.CREATED).json(novoAluno);
+    return response.status(HTTP_STATUS.SUCCESS_CREATED).json(novoAluno);
   } catch (error) {
     console.error("Erro ao inserir aluno:", error);
     return response.status(HTTP_STATUS.SERVER_ERROR).json({

@@ -40,7 +40,7 @@ export default async (request, response) => {
         error: "Professor não encontrado",
       });
     }
-    return response.status(HTTP_STATUS.NO_CONTENT).send();
+    return response.status(HTTP_STATUS.SUCCESS_NO_CONTENT).send();
   } catch (error) {
     console.error("Erro ao deletar professor:", error);
     return response.status(HTTP_STATUS.SERVER_ERROR).json({

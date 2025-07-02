@@ -20,7 +20,7 @@ export default async (request, response) => {
       aluno_id
     });
 
-    return response.status(HTTP_STATUS.CREATED).json(novoResponsavel);
+    return response.status(HTTP_STATUS.SUCCESS_CREATED).json(novoResponsavel);
   } catch (error) {
     console.error("Erro ao inserir responsável:", error);
     return response.status(HTTP_STATUS.SERVER_ERROR).json({

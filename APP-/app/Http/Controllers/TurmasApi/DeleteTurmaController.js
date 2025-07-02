@@ -15,7 +15,7 @@ export default async (request, response) => {
         error: "Turma não encontrada",
       });
     }
-    return response.status(HTTP_STATUS.NO_CONTENT).send();
+    return response.status(HTTP_STATUS.SUCCESS_NO_CONTENT).send();
   } catch (error) {
     console.error("Erro ao deletar turma:", error);
     return response.status(HTTP_STATUS.SERVER_ERROR).json({

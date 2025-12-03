@@ -17,6 +17,11 @@ export default (function () {
 
     router.get('/date', DateController);
 
+    // Página de teste que chama o endpoint para criar usuários mock
+    router.get('/user-view', (request, response) => {
+        return response.render('user');
+    });
+
     router.get('/env', (request, response) => {
         return response.status(CONSTANTS.HTTP.SUCCESS).json({
             env: process.env,

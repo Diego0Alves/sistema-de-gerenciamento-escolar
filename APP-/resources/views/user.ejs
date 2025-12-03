@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Teste de Usuários</title>
+		<style>
+			html, body { height: 100%; margin: 0; }
+			.center { height: 100vh; display:flex; align-items:center; justify-content:center; background:#f5f7fa; }
+			.btn { padding: 14px 24px; font-size:16px; border-radius:8px; border:none; background:#2563eb; color:#fff; cursor:pointer; }
+			.status { margin-top:12px; text-align:center; font-family:Arial, sans-serif; }
+		</style>
+	</head>
+	<body>
+		<div class="center">
+			<div>
+				<button id="createBtn" class="btn">Criar usuários mock</button>
+				<div id="status" class="status"></div>
+			</div>
+		</div>
+
+		<script>
+			const btn = document.getElementById('createBtn');
+			const statusEl = document.getElementById('status');
+
+			btn.addEventListener('click', async () => {
+				btn.disabled = true;
+				statusEl.textContent = 'Enviando requisição...';
+
+				try {
+					const res = await fetch('/user-test', { method: 'POST' });
+					if (!res.ok) {
+						const text = await res.text();
+						statusEl.textContent = `Erro: ${res.status} - ${text}`;
+						btn.disabled = false;
+						return;
+					}
+
+					const json = await res.json();
+					statusEl.textContent = (json && json.message) ? json.message : 'Sucesso';
+				} catch (err) {
+					statusEl.textContent = 'Erro na requisição: ' + err.message;
+				} finally {
+					btn.disabled = false;
+				}
+			});
+		</script>
+	</body>
+</html>
